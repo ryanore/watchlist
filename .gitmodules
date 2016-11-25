@@ -1,0 +1,3 @@
+[submodule "watchlist-api"]
+	path = watchlist-api
+	url = git@github.com:ryanore/watchlist-api.git
