@@ -1,36 +1,3 @@
-# 1. Added bare necessities
-#   Inside Root: docker-compose.yml
-#   Inside API :  Dockerfile, Gemfile(with rails) Gemfile.lock
-#
-# 2.Create the rails API app
-#   (a) get into the api folder
-#     $ cd watchlist-api
-#   (b) Build to get correct version of rails
-#     $docker-compose build
-#   (c) Create the API App
-#     $ docker-compose run api rails new .  --api --database=postgresql
-#
-# 3. Compose
-#   (a) get to Root
-#     $cd ../
-#   (b) build
-#     $ docker-compose build
-#   (c) compose down and remove orphans
-#     $ docker-compose down --remove-orphans
-#   (d) compose up to start
-#     $ docker-compose up -d
-#
-# 4. Add a model and serializer
-#   (a) scaffold a user, list, and movie
-#     $ docker-compose run api rails g scaffold ...
-#   (b) add active_model_serializers gem then generate a serializer
-#     edit the gem file to add active_model_serializers
-#     edit the gem file to add pry for testing in dev
-#     $ docker-compose build
-#     $ docker-compose run api rails g serializer user first_name:string last_name:string
-#   (c) run migration in docker-compose then fire it up
-#     $ docker-compose run api rails db:migrate
-#
 version: '2'
 
 services:
@@ -46,6 +13,7 @@ services:
       rake db:drop;
       rake db:create;
       rake db:migrate;
+      rake db:seed;
       rm ./tmp/pids/server.pid;
       bundle exec rails s -b 0.0.0.0
       '
